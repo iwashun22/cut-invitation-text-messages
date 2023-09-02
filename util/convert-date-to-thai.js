@@ -15,7 +15,7 @@ const months = {
   ["Dec"]: "ธ.ค."
 }
 
-function convertToThaiDate(dateStr) {
+function convertDateToThai(dateStr) {
   const dateArray = dateStr.split(" ");
   const monthName = dateArray.splice(1, 1)[0];
   const dateNum = dateArray.splice(1, 1)[0].replace(",", "");
@@ -46,4 +46,4 @@ function convertToThaiDate(dateStr) {
   return dateToString;
 }
 
-module.exports = convertToThaiDate;
+module.exports = convertDateToThai;
