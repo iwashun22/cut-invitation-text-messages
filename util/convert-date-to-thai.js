@@ -16,7 +16,10 @@ const months = {
 }
 
 function convertDateToThai(dateStr) {
+  // example dateStr
+  // Time: Dec 12, 2022 12:00 PM Bangkok
   const dateArray = dateStr.split(" ");
+  // ["Time:", "Dec", "12,", "2022", "12:00", "PM", "Bangkok"]
   const monthName = dateArray.splice(1, 1)[0];
   const dateNum = dateArray.splice(1, 1)[0].replace(",", "");
 

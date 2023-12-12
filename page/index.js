@@ -1,17 +1,34 @@
 import $ from 'jquery';
 // import "./style.css";
-import { cutTextWithFilter } from '../util/cut-text';
+import { cutTextWithFilter, cutTextByArray } from '../util/cut-text';
 
 $(() => {
 
-$("#submit").on('click', function(e) {
+$("#cut").on('click', function(e) {
   const text = $("#input-text").val();
-  const shorten = cutTextWithFilter(text);
+  const shorten = cutTextByArray(text);
   console.log(shorten);
+  
+  if(!shorten) return;
+  
+  const copyButton = $("#copy-btn");
+  
+  if(!copyButton.length) {
+    const input = document.createElement("input");
+    input.type = "button";
+    input.value = "copy";
+    input.id = "copy-btn";
+    input.classList.add("pd-7");
+    const buttonContainer = $(".button-container");
+    input.addEventListener("click", () => {
+      // console.log(shorten);
+      navigator.clipboard.writeText(shorten)
+      $(input).remove();
+    });
+    buttonContainer.append(input);
+  }
 
   $("#result-text").val(shorten);
 })
 
 });
-
-console.log("hi");

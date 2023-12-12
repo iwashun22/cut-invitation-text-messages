@@ -4,7 +4,7 @@ const { cutTextByArray, cutTextWithFilter } = require('./util/cut-text');
 const text = fs.readFileSync("./input-file.txt", "utf-8");
 // console.log(text);
 
-const shorten = cutTextWithFilter(text);
+const shorten = cutTextByArray(text);
 
 console.log("\n===============\n");
 console.log(shorten);

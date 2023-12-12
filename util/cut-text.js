@@ -1,26 +1,32 @@
 const convertDateToThai = require('./convert-date-to-thai')
 
+const template = [
+  /Topic:+\s/,
+  /Time:+\s/,
+  undefined,
+  /Join Zoom Meeting/,
+  /https:\/\//,
+  undefined,
+  /Meeting ID:+\s/,
+  /Passcode:+\s/
+]
 function cutTextByArray(text) {
   const array = text.trim().split("\n");
   console.log(array);
   console.log(array.length);
   array.shift();
 
-  // remove unnecessary part
-  const unnecessaryIndex = array.indexOf("---")
-  const end = array.length - unnecessaryIndex;
-  array.splice(unnecessaryIndex, end);
-
-  // converting to Thai date
-  let thaiDate = convertDateToThai(array[2]);
-  array[2] = thaiDate;
-
-  // remove empty element in array
-  array.shift(); array.pop();
-  const newArr = array.map((text, index) => index === (array.length-1) ? text : (text+"\n"));
-
-  const toString = newArr.toString().replaceAll(",", "");
-  return toString;
+  const filteredArray = [];
+  template.forEach((regex, i) => {
+    filteredArray.push(
+      regex === undefined ?  
+        "" :
+        array[ array.findIndex(v => v.match(regex)) ]
+    )
+  })
+  // converting date
+  filteredArray[1] = convertDateToThai(filteredArray[1]);
+  return filteredArray.join("\n").replaceAll(",", "");
 }
 
 function cutTextWithFilter(text) {
