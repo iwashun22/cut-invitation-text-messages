@@ -13,8 +13,7 @@ const template = [
 function cutTextByArray(text) {
   const array = text.trim().split("\n");
   console.log(array);
-  console.log(array.length);
-  array.shift();
+  // console.log(array.length);
 
   const filteredArray = [];
   template.forEach((regex, i) => {
