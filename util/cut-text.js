@@ -26,6 +26,7 @@ function cutTextByArray(text) {
   return filteredArray.join("\n").replaceAll(",", "");
 }
 
+// ! I prefer using cutTextByArray() even though it works.
 function cutTextWithFilter(text) {
   let array = text.trim().split("\n");
   const filter = eachLine => eachLine.match(/Topic\:|Time\:|Join|https|Meeting ID\:|Passcode\:/) ? true : false;
@@ -42,7 +43,6 @@ function cutTextWithFilter(text) {
 
   array = array.map((line, index) => index === (array.length-1) ? line : (line+"\n"));
   const toString = array.toString().replaceAll(",", "");
-  // console.log(toString);
 
   return toString;
 }
